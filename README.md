@@ -15,7 +15,10 @@ We are considering CRAN release of the package (or its parts).
 The current development version can be downloaded from GitHub and compiled locally. 
 
 ```r
-devtools::install_github("certara/survivalnma", build_vignettes = TRUE)
+devtools::install_github("certara/survivalnma", 
+                          build_opts = c("--no-resave-data", "--no-manual"), 
+                          build_vignettes = TRUE)
+
 library(survivalnma)
 ```
 
