@@ -272,11 +272,19 @@ weibull.nma
 
 More complicated models like fractional polynomials or random-effect models are all ran with the same function (once again it will not converge during this short run):
 
-```{r}
-second.order.nma <- survnma(dataframe, "fp2", P = c(2.3, 0.23), type = "random", min_time_change = 0.05)
-# The output "remembers"" all this extra info
-second.order.nma$model
-second.order.nma$P
+```{r, eval = FALSE}
+fp1.nma <- survnma(mrcc_small,
+                   "fp1", P = 1, 
+                   type = "fixed", min_time_change = 0.05)
+
+fp2.nma <- survnma(mrcc_small, 
+                   "fp2", P = c(2.3, 0.23),
+                   type = "random", min_time_change = 0.05)
+
+# Extract model name
+fp2.nma$model
+# Extract powers used
+fp2.nma$P
 ```
 
 ## Automatic convergence for the models
