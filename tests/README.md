@@ -1,0 +1,1 @@
+Testing is included in the fully-featured version of the package, not yet in the public release.

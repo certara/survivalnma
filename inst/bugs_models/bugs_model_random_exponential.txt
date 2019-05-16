@@ -1,0 +1,27 @@
+Model{
+	for (i in 1:N){ # N=number of data points in dataset
+		#likelihood
+		r[i]~ dbin(p[i],n[i])
+		p[i]<-1-exp(-h[i]*dt[i])
+
+		log(h[i])<-nu[i] + log(time[i])*theta[i]
+		nu[i]<-mu[s[i]]+delta[s[i]]*(1-equals(t[i],b[i]))
+		theta[i]<-0
+		}
+
+	for(k in 1 :NS){ # NS=number of studies in dataset
+		delta[k] ~ dnorm(md[k],omega[1,1])
+		md[k]<-d[ts[k]]-d[bs[k]]
+	}
+
+	# priors
+		d[1]<-0
+	for(j in 2 :NT){ # NT=number of treatments
+		d[j] ~ dnorm(mean[1],prec2[1,1])
+	}
+	for(k in 1 :NS){
+		mu[k] ~ dnorm(mean[1],prec2[1,1])
+	}
+	omega[1,1] ~ dgamma(0.5, R[1,1])
+        #omega[1,1] ~ dwish(R[1,1],1)
+}

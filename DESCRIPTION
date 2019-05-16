@@ -1,0 +1,31 @@
+Package: survivalnma
+Type: Package
+Title: network meta-analyses of survival data
+Version: 0.1.0
+Author: Witold Wiecek, Savvas Pafitis
+Maintainer: Witold Wiecek <witold.wiecek@certara.com>
+Description: Implementation of WinBUGS models for Bayesian survival NMA,
+    Automates checks of inputs and network, improves model convergence.
+    Includes survival and hazards calculation and flexible plotting.
+Depends: R (>= 3.1.0)
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
+Imports: dplyr,
+    extraDistr,
+    ggplot2,
+    igraph,
+    magrittr,
+    parallel,
+    R2WinBUGS,
+    stats,
+    survival,
+    survminer,
+    utils,
+    graphics,
+    knitr
+Suggests: testthat,
+    rmarkdown
+VignetteBuilder: knitr
