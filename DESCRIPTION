@@ -14,11 +14,8 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 6.1.1
 Imports: dplyr,
-    extraDistr,
     ggplot2,
     igraph,
-    magrittr,
-    parallel,
     R2WinBUGS,
     stats,
     survival,
@@ -26,6 +23,5 @@ Imports: dplyr,
     utils,
     graphics,
     knitr
-Suggests: testthat,
-    rmarkdown
+Suggests: rmarkdown
 VignetteBuilder: knitr

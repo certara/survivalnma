@@ -14,7 +14,6 @@
 #'
 #' @export
 #' @importFrom knitr kable
-#' @import magrittr
 
 
 survival_table <- function(survnma, study, treatments = NULL,
@@ -27,8 +26,7 @@ survival_table <- function(survnma, study, treatments = NULL,
       survivals <- prep_all_survivals(survnma, study, treatments, timesteps = timesteps)
   }
 
-  survival <- survivals %>%
-    split(f = survivals$label)
+  survival <- split(survivals, f = survivals$label)
 
   treatments <- unique(survivals$label)
 

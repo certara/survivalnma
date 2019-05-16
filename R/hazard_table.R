@@ -14,7 +14,6 @@
 #'
 #' @export
 #' @importFrom knitr kable
-#' @import magrittr
 
 
 hazard_table <- function(survnma, treatments = NULL, reference,
@@ -31,8 +30,7 @@ hazard_table <- function(survnma, treatments = NULL, reference,
   }
 
 
-  hazard <- hazards %>%
-    split(f = hazards$label)
+  hazard <- split(hazards, f = hazards$label)
 
   treatments <- unique(hazards$label)
 
