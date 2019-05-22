@@ -2,6 +2,9 @@
 
 `survivalnma` is an R package for conducting of Bayesian network meta-analyses of parametric survival curves created at Certara by Witold Wiecek and Savvas Pafitis.
 
+__`survivalnma` was presented at ISPOR New Orleans 2019;the conference poster provides a good overview of the package and is [available online](https://www.dropbox.com/s/50kma8e8jpghvf4/poster_final_030519_SP.pdf?dl=1)__
+
+
 This package is meant to facilitate use of the existing Bayesian NMA 
 models which were already presented in (1) and (2). Running such WinBUGS models is 
 a slow process and when errors occur, they are hard to understand 
@@ -12,7 +15,7 @@ accessible and NMA workflows reproducible.
 ## Installation
 
 We are considering CRAN release of the package (or its parts). 
-The current development version can be downloaded from GitHub and compiled locally. 
+The current development version can be downloaded from GitHub and compiled locally. In case of problems with installation we encourage users to contact the maintainer (`witold.wiecek@certara.com`) directly.
 
 ```r
 devtools::install_github("certara/survivalnma", 
@@ -21,6 +24,20 @@ devtools::install_github("certara/survivalnma",
 
 library(survivalnma)
 ```
+
+## Fully documented NMA workflow
+
+`survivalnma` is meant as a user-friendly introduction to parametric NMA models and 
+alternative to working with models more directly in WinBUGS.
+We have created a complete vignette covering both theory and practical steps in 
+conducting NMA analysis with `suvnma`. In R console try
+
+```r
+vignettes('survivalnma_guide')
+```
+
+Documentation is also available for all exported functions, starting from `?survnma`.
+
 
 ## Basic example
 
@@ -54,18 +71,7 @@ survival_plot(fit_wbl)
 hazard_plot(fit_wbl)
 ```
 
-## Fully documented NMA workflow
 
-`survivalnma` is meant as a user-friendly introduction to parametric NMA models and 
-alternative to working with models more directly in WinBUGS.
-We have created a complete vignette covering both theory and practical steps in 
-conducting NMA analysis with `suvnma`. In R console try
-
-```r
-vignettes('survivalnma_guide')
-```
-
-Documentation is also available for all exported functions, starting from `?survnma`.
 
 ## References
 
