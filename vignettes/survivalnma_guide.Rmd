@@ -177,14 +177,14 @@ print(survivalnma::mrcc_small)
 
 ## Plotting Kaplan Meier curve
 
-Plotting Kaplan-Meier curves relies on external packages `survival` and `survminer` (function `ggsurvplot`). These will be installed automatically when user installs `survivalnma`.
+Plotting Kaplan-Meier curves relies on external packages `survival` and `survminer` (function `ggsurvplot`). These will NOT be installed automatically when user installs `survivalnma`.
 
 1. KM survfit object. This is the output of the `survival::survfit` function  
 2. IPD data used to generate the above survfit object
 
 It then outputs a standard Kaplan-Meier curve
 
-```{r survival, , fig.width= 8, fig.height= 5}
+```{r survival, eval=FALSE, fig.width= 8, fig.height= 5}
 # read data
 IPD.data <- read.table(system.file("extdata","narrow", "Mota_OS_Ifn_IPD.txt", 
                                        package = "survivalnma", mustWork = TRUE))
@@ -194,11 +194,8 @@ colnames(IPD.data) <- c("time", "event", "arm")
 KM.est <- survival::survfit(survival::Surv(time, event)~1,
                             data=IPD.data,
                             type="kaplan-meier")
-
 # This is what `survminer` plots for KM curves
-km.plot <- survminer::ggsurvplot(KM.est, data = IPD.data, legend.labs = "Kaplan Meier")
-plot(km.plot$plot)
-
+survminer::ggsurvplot(KM.est, data = IPD.data, legend.labs = "Kaplan Meier")
 ```
 
 

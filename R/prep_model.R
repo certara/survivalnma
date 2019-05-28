@@ -4,7 +4,7 @@ prep_model_file <- function(model, type) {
   file.copy(
     system.file("bugs_models",
                 model_filenames[[type]][[model]],
-                package = "survnma"),
+                package = "survivalnma"),
     file_loc)
   # ".temp_survnma_model")
 

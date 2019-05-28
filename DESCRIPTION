@@ -18,8 +18,6 @@ Imports: dplyr,
     igraph,
     R2WinBUGS,
     stats,
-    survival,
-    survminer,
     utils,
     graphics,
     knitr

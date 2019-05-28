@@ -85,7 +85,8 @@
 #'                                    "Mota_OS_Ifn_KM.txt",
 #'                                    "Mot_OS_Suni_KM.txt",
 #'                                    "Mot_OS_Pazo_KM.txt"), function(x)
-#'               system.file("extdata", "narrow", x, package="survnma", mustWork=TRUE)))
+#'               system.file("extdata", "narrow", x, 
+#'                           package="survivalnma", mustWork=TRUE)))
 #'
 #' # example of simple survnma models (fixed effects)
 #' fit_wbl <- survnma(nma_df, "weibull", min_time_change = 0.05)
