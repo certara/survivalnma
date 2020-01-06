@@ -12,9 +12,10 @@ survnma(nma_df = NULL, model = "exponential", type = "fixed",
 }
 \arguments{
 \item{nma_df}{a \code{data.frame} with columns \code{treatment}, \code{study}, \code{baseline} and \code{filepath};
-each file in \code{filepath} should have 4 columns in the following order: time, number at risk,
-number censored, number of events;
-refer to \link{read_km_folder} for automatically creating inputs from folder of text files}
+each \code{filepath} should be a path to a text file corresponding to a Kaplan-Meier curve;
+each file should have 3 columns, in the following order: time, number at risk,
+number of events. Names of columns do not matter.
+Refer to \link{read_km_folder} for automatically creating inputs from folders of text files.}
 
 \item{model}{\code{string}; family of survival curves to use
 Use one of: \code{weibull}, \code{gompertz}, \code{exponential}

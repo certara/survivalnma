@@ -77,15 +77,15 @@ check_km <- function(df){
 
 
 fixDt <- function(data, threshold = 0.05){
-  data$groupTime <- floor(data$V1/threshold)
+  data$groupTime <- floor(data$time/threshold)
   for(group in unique(data$groupTime)){
-    data$newTime[data$groupTime == group] <- min(data$V1[data$groupTime == group])
-    data$newTotal[data$groupTime == group] <- max(data$V2[data$groupTime == group])
-    data$newEvent[data$groupTime == group] <- sum(data$V3[data$groupTime == group])
-    data$newCensor[data$groupTime == group] <- sum(data$V4[data$groupTime == group])
+    data$newTime[data$groupTime == group] <- min(data$time[data$groupTime == group])
+    data$newTotal[data$groupTime == group] <- max(data$n[data$groupTime == group])
+    data$newEvent[data$groupTime == group] <- sum(data$r[data$groupTime == group])
+    # data$newCensor[data$groupTime == group] <- sum(data$V4[data$groupTime == group])
   }
-  newdata <- unique(data[, 5:9])
-  newdata <- newdata[, 2:5]
-  colnames(newdata) <- c("V1", "V2", "V3", "V4")
+  newdata <- unique(data[, c("groupTime", "newTime", "newTotal", "newEvent")])
+  newdata <- newdata[, 2:4]
+  names(newdata) <- c("time", "n", "r")
   return(newdata)
 }

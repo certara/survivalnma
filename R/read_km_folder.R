@@ -2,9 +2,11 @@
 #'
 #' The function reads a collection of files containing data from digitized Kaplan-Meier curves.
 #'
-#' @param path path to a folder containing txt files from digitizing; each KM file
-#'             should have 4 columns in the following order: time, number at risk,
-#'             number censored, number of events
+#' @param path path to a folder containing txt files from digitizing; each text file
+#'             (corresponding to a Kaplan-Meier curve)
+#'             should have 3 columns,
+#'             in the following order: time, number at risk,
+#'             number of events. Names of columns do not matter.
 #' @param preferred_baseline character; if you want to specify a preferred baseline treatment
 #' @param filter character; only files containing \code{filter} in title will be used
 #' @param split character; sign that separates study, outcome and treatment

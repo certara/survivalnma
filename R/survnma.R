@@ -5,9 +5,10 @@
 #' from the posterior distribution and interprets them in terms of survivals and hazards.
 #'
 #' @param nma_df a \code{data.frame} with columns `treatment`, `study`, `baseline` and `filepath`;
-#'               each file in `filepath` should have 4 columns in the following order: time, number at risk,
-#'               number censored, number of events;
-#'               refer to [read_km_folder] for automatically creating inputs from folder of text files
+#'               each `filepath` should be a path to a text file corresponding to a Kaplan-Meier curve;
+#'               each file should have 3 columns, in the following order: time, number at risk,
+#'               number of events. Names of columns do not matter.
+#'               Refer to [read_km_folder] for automatically creating inputs from folders of text files.
 #' @param model \code{string}; family of survival curves to use
 #'              Use one of: `weibull`, `gompertz`, `exponential`
 #'              `lognormal`, `loglogistic`, `fp1`, `fp2`.

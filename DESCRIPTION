@@ -2,7 +2,8 @@ Package: survivalnma
 Type: Package
 Title: network meta-analyses of survival data
 Version: 0.1.0
-Author: Witold Wiecek, Savvas Pafitis
+Author: c(person("Witold", "Wiecek",  email = "witold.wiecek@certara.com", role = c("cre", "aut")),
+          person("Savvas", "Pafitis"))
 Maintainer: Witold Wiecek <witold.wiecek@certara.com>
 Description: Implementation of WinBUGS models for Bayesian survival NMA,
     Automates checks of inputs and network, improves model convergence.

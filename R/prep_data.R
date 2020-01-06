@@ -3,13 +3,13 @@
 # return a well-formated matrix that represents this one study&trt
 # combination in the input matrix
 convert_from_digitizer <- function(input, t, b, s) {
-  input <- as.data.frame(as.matrix(input))
+  
   #this '1000' value is a fake placeholder value
-  #note how it's omitted in the output
-  input$time <- c(input[-1,"V1"], 1000)
+  #note how it's omitted in the output, so it doesn't matter
+  input$time <- c(input[-1,"time"], 1000)
   input$dt <- input$time - c(0, input[-nrow(input),"time"])
-  input$n <- input$V2          # number of patients at risk in the interval
-  input$r <- input$V3          # number of events in the interval
+  #input$n <- input$V2          # number of patients at risk in the interval
+  #input$r <- input$V3          # number of events in the interval
   input$t <- t                 # treatment
   input$b <- b                 # baseline treatment
   input$s <- s                 # study
@@ -56,9 +56,16 @@ prepare_winbugs_data <- function(df, min_time_change = 0) {
     }else{
       km <- df$km[[i]]
     }
+    
+    # Make sure column names are time, n, r, c
+    km <- as.data.frame(as.matrix(km))
+    km <- km[, 1:3]
+    names(km) <- c("time", "n", "r")
+    
+    
     bad_inputs <- c()
     if(min_time_change == 0){
-      if(min(diff(km$V1)) < 0.01){
+      if(min(diff(km$time)) < 0.01){
         bad_inputs <- c(bad_inputs, i)
       }
     }else{

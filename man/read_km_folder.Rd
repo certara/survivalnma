@@ -8,9 +8,11 @@ read_km_folder(path, preferred_baseline = NULL, filter = "KM.txt",
   split = "_", study = 1, outcome = 2, treatment = 3)
 }
 \arguments{
-\item{path}{path to a folder containing txt files from digitizing; each KM file
-should have 4 columns in the following order: time, number at risk,
-number censored, number of events}
+\item{path}{path to a folder containing txt files from digitizing; each text file
+(corresponding to a Kaplan-Meier curve)
+should have 3 columns,
+in the following order: time, number at risk,
+number of events. Names of columns do not matter.}
 
 \item{preferred_baseline}{character; if you want to specify a preferred baseline treatment}
 

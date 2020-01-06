@@ -141,7 +141,7 @@ We typically use [DigitizeIt](https://www.digitizeit.de/) to extract the curve. 
 
 The software then supplies a digitized version of the curve, in a text format. A final step is required before we can use the data. Analyst modifies the data (e.g. in Excel) by adding numbers at risk where available. This is crucial in the analysis. 
 
-By default we assume that the user will supply text files corresponding to individual Kaplan-Meier curves. That is, each file will have columns corresponding to `"time"`, `"n.risk"`, `"n.event"`, `"n.censor"`. Note that the columns __do not have to follow this naming convention, but have to follow this ordering.__)
+By default we assume that the user will supply text files corresponding to individual Kaplan-Meier curves. That is, each file will have columns corresponding to `"time"`, `"n.risk"`, `"n.event"`. Note that the columns __do not have to follow this naming convention, but have to follow this ordering.__)
 
 
 ## Data preparation
