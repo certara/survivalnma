@@ -9,6 +9,20 @@
 #' @param tot.events total number of events reported (integer)
 #' @export
 #' 
+#' @examples
+#' #Make up some data:
+#' ipd_curve1 <- guyot.method(x = seq(0, 100), y = 1-pexp(seq(0, 100), rate = 1/50), 
+#'              t=c(0, 10, 50), r = c(1000, 800, 250))
+#' ipd_curve2 <- guyot.method(x = seq(0, 100), y = 1-pexp(seq(0, 100), rate = 1/30), 
+#'              t=c(0, 10, 50), r = c(1000, 700, 100))
+#' library(survival)
+#' ipd_curve1$patient$treatment <- "active"
+#' ipd_curve2$patient$treatment <- "chemo"
+#' ipd <- rbind(ipd_curve1$patient, ipd_curve2$patient)
+#' survival_fit <- survfit(Surv(time, event) ~ treatment, data = ipd)
+#' survival_fit
+#' plot(survival_fit, col = c("blue", "red"))      
+#' 
 #' @references Guyot, Patricia, AE Ades, Mario JNM Ouwens, and Nicky J. Welton. 
 #'             “Enhanced Secondary Analysis of Survival Data: Reconstructing the 
 #'             Data from Published Kaplan-Meier Survival Curves.” 
