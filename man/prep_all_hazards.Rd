@@ -4,8 +4,7 @@
 \alias{prep_all_hazards}
 \title{prep_all_hazards}
 \usage{
-prep_all_hazards(nmafit, treatments = NULL, reference,
-  timesteps = seq(0, 30))
+prep_all_hazards(nmafit, treatments = NULL, reference, timesteps = seq(0, 30))
 }
 \arguments{
 \item{nmafit}{a \code{survnma} object to be used for subsequent calculations}

@@ -4,8 +4,14 @@
 \alias{hazard_table}
 \title{hazard_table}
 \usage{
-hazard_table(survnma, treatments = NULL, reference, timesteps = seq(0,
-  30), hazards = NULL, print = FALSE)
+hazard_table(
+  survnma,
+  treatments = NULL,
+  reference,
+  timesteps = seq(0, 30),
+  hazards = NULL,
+  print = FALSE
+)
 }
 \arguments{
 \item{survnma}{survnma object to be passed}

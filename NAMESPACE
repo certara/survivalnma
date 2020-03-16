@@ -2,6 +2,7 @@
 
 S3method(print,survnma)
 export(add_baseline_column)
+export(guyot.method)
 export(hazard_plot)
 export(hazard_table)
 export(prep_all_hazards)

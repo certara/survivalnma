@@ -4,10 +4,20 @@
 \alias{hazard_plot}
 \title{hazard_plot}
 \usage{
-hazard_plot(data = NULL, treatments = NULL, reference = NULL,
-  timesteps = seq(0, 30), study_labs = NA, colors = NULL,
-  xlab = "", ylab = "", xlim = NULL, ylim = NULL, title = "",
-  interval = FALSE)
+hazard_plot(
+  data = NULL,
+  treatments = NULL,
+  reference = NULL,
+  timesteps = seq(0, 30),
+  study_labs = NA,
+  colors = NULL,
+  xlab = "",
+  ylab = "",
+  xlim = NULL,
+  ylim = NULL,
+  title = "",
+  interval = FALSE
+)
 }
 \arguments{
 \item{data}{a dataframe obtained directly through function \code{\link{prep_all_hazards}}

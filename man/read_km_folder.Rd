@@ -4,8 +4,15 @@
 \alias{read_km_folder}
 \title{Read many digitized Kaplan-Meier curves}
 \usage{
-read_km_folder(path, preferred_baseline = NULL, filter = "KM.txt",
-  split = "_", study = 1, outcome = 2, treatment = 3)
+read_km_folder(
+  path,
+  preferred_baseline = NULL,
+  filter = "KM.txt",
+  split = "_",
+  study = 1,
+  outcome = 2,
+  treatment = 3
+)
 }
 \arguments{
 \item{path}{path to a folder containing txt files from digitizing; each text file

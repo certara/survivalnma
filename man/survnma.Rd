@@ -4,11 +4,22 @@
 \alias{survnma}
 \title{Survival network meta-analysis models}
 \usage{
-survnma(nma_df = NULL, model = "exponential", type = "fixed",
-  prior = NULL, P = NULL, inits = "generate", n.chains = 3,
-  n.iter = 5000, auto_restart = FALSE, connected_check = TRUE,
-  warnings = TRUE, bugs.directory = "C:/WinBUGS14",
-  min_time_change = 0, ...)
+survnma(
+  nma_df = NULL,
+  model = "exponential",
+  type = "fixed",
+  prior = NULL,
+  P = NULL,
+  inits = "generate",
+  n.chains = 3,
+  n.iter = 5000,
+  auto_restart = FALSE,
+  connected_check = TRUE,
+  warnings = TRUE,
+  bugs.directory = "C:/WinBUGS14",
+  min_time_change = 0,
+  ...
+)
 }
 \arguments{
 \item{nma_df}{a \code{data.frame} with columns \code{treatment}, \code{study}, \code{baseline} and \code{filepath};
@@ -56,7 +67,7 @@ stop after 5 iterations}
 
 \item{warnings}{logical; if FALSE, warning messages about lack of convergence are skipped}
 
-\item{bugs.directory}{WinBUGS directory path; defaults to \code{C:/WinBUGS14}}
+\item{bugs.directory}{WinBUGS directory path; defaults to \verb{C:/WinBUGS14}}
 
 \item{min_time_change}{numeric; a threshold for merging data points where differences in time are
 very small (see Details). We suggest a range of 0.01-0.05.
@@ -75,7 +86,7 @@ from the posterior distribution and interprets them in terms of survivals and ha
 }
 \details{
 WinBUGS implementation is through \code{R2WinBUGS} package. Additional arguments can be passed via \code{...},
-including \code{bugs.directory}. We use default of \code{C:/WinBUGS14/}.
+including \code{bugs.directory}. We use default of \verb{C:/WinBUGS14/}.
 
 WinBUGS models code follows publications of M.J. Ouwens and J.P. Jansen (see References).
 Models can be viewed with \code{\link[survnma]{survnma_model}}.

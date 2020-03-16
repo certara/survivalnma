@@ -4,8 +4,12 @@
 \alias{prep_all_survivals}
 \title{prep_all_survivals}
 \usage{
-prep_all_survivals(nmafit, study, treatments = nmafit$treatment,
-  timesteps = seq(0, 30))
+prep_all_survivals(
+  nmafit,
+  study,
+  treatments = nmafit$treatment,
+  timesteps = seq(0, 30)
+)
 }
 \arguments{
 \item{nmafit}{a survnma object to be used for subsequent calculations}

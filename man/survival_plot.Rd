@@ -4,10 +4,20 @@
 \alias{survival_plot}
 \title{survival_plot}
 \usage{
-survival_plot(data = NULL, study = NULL, treatments = NULL,
-  timesteps = seq(0, 30), study_labs = NA, colors = NULL,
-  xlab = NULL, ylab = "", xlim = NULL, ylim = NULL, title = "",
-  interval = TRUE)
+survival_plot(
+  data = NULL,
+  study = NULL,
+  treatments = NULL,
+  timesteps = seq(0, 30),
+  study_labs = NA,
+  colors = NULL,
+  xlab = NULL,
+  ylab = "",
+  xlim = NULL,
+  ylim = NULL,
+  title = "",
+  interval = TRUE
+)
 }
 \arguments{
 \item{data}{One of the two:
