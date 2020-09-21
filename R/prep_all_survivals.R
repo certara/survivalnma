@@ -55,10 +55,13 @@ prep_all_survivals <- function(nmafit, study, treatments=nmafit$treatment,
     # d <- extract_d(nmafit, treatments[i])
     d <- relative_d_in_study(nmafit, treatments[i], study)
     params <- mu + d
-    surv.points <- survival_curve(nmafit$model, params, times, P= nmafit$P, type = "interval")
-    if(any(is.na(surv.points))){
-      message("Faulty parameters for ", treatments[i]," caused survival > 1. These have been removed.")
-    }
+    surv.points <- survival_curve(nmafit$model, params, times, P= nmafit$P, type = "interval",
+                                  warn = TRUE, trt_warn = treatments[i])
+    # This warning is now handled inside survival_curve():
+    # if(any(is.na(surv.points))){
+    #   message("Faulty parameters for ", treatments[i]," caused survival to be NA. ",
+    #           "The problematic treatment(s) will be removed.")
+    # }
     res <- rbind(res,
                  data.frame(curve = nmafit$model, t = times,
                             mean = surv.points[2,], lci = surv.points[1,],

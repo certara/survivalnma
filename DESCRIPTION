@@ -1,7 +1,7 @@
 Package: survivalnma
 Type: Package
 Title: network meta-analyses of survival data
-Version: 0.1.0
+Version: 0.1.1
 Author: c(person("Witold", "Wiecek",  email = "witold.wiecek@certara.com", role = c("cre", "aut")),
           person("Savvas", "Pafitis"))
 Maintainer: Witold Wiecek <witold.wiecek@certara.com>
@@ -15,12 +15,19 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.0.2
 Imports: dplyr,
+    extraDistr,
     ggplot2,
     igraph,
+    magrittr,
+    parallel,
     R2WinBUGS,
     stats,
+    survival,
+    survminer,
     utils,
     graphics,
     knitr
-Suggests: rmarkdown
+Suggests: 
+    testthat (>= 2.1.0),
+    rmarkdown
 VignetteBuilder: knitr

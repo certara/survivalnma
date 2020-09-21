@@ -10,11 +10,15 @@
 #' @param P vector of powers, used only if \code{family == "fp1"} (uses \code{p[1]})
 #'          or \code{family == "fp2"} (uses \code{p[1]} and \code{p[2]})
 #' @param type string: interval, mean or all
+#' @param warn logical; warn if some of the calculated values are above 1 (this happens for some of the
+#'             models in Ouwens et al paper where the treatment parameters move out of the support)
+#' @param trt_warn Treatment name (to be used when producing warnings only).
 #' @return a vector \code{c(q1, median, q3, mean)}
 #' @import stats
+#' @noRd
 
 survival_curve <- function(family, param.mtx, times, P = NULL,
-                           type = "interval") {
+                           type = "interval", warn = TRUE, trt_warn = "unknown") {
   if(length(times) == 1){
     warning("Length of time vector should be at least 2")
   }
@@ -44,29 +48,20 @@ survival_curve <- function(family, param.mtx, times, P = NULL,
     }))
   }
 
-  # in our test scenario
-  # dim(res) = 1002, 999
-
-  # dim(param.mtx) = 1002x2
-  # and
-  # length(times) = 999
-
-  # hence res contains survivals evaluated at all time points, with all parameters
-  # and then its mean (per time point) is taken as an average over all parameters
-
-  # idea is to extract which parameter is causing the mean to spike
-  # but the extracted parameter is not close to 0...
-
-  # problematic_index <- which.max(res)
-  # if(max(res[problematic_index,]) > 1){
-  #   warning("There has been a faulty survival value greater than 1.",
-  #          " The parameters that caused this were: ", param.mtx[problematic_index, ][1],
-  #          " and ", param.mtx[problematic_index, ][2] )
-  # }
+  res_no_na <- res
+  res_no_na[is.na(res)] <- 1e06 #flag NAs
+  if(warn && (max(res_no_na) > 1)){
+    invalid_percent <- round(100*sum(apply(res_no_na, 1, function(x) any(x > 1)))/nrow(res_no_na), 2)
+    res[res > 1] <- 1
+    res[is.na(res)] <- 1 #flag NAs
+    warning("In ", invalid_percent, "% of posterior samples the survival curve for ", trt_warn,
+            " was greater than 1 or NA for at least 1 time point. ",
+            "These invalid values are replaced by 1. When this % is high, this will make results invalid. ",
+            "Please refer to the package vignette to understand why this error sometimes occurs.")
+  }
   if(type == "interval"){
     if(any(is.na(res))){
       return(matrix(NA,3,length(times)))
-
     }else{
     return(apply(res, 2, function(x) c(stats::quantile(x, .025, na.rm = TRUE),
                                        mean= mean(x),

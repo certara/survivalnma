@@ -10,6 +10,7 @@
 #'
 #' @importFrom igraph graph_from_data_frame
 #' @importFrom igraph is.connected
+#' @export
 #'
 
 check_connected <- function(df){
