@@ -133,7 +133,7 @@ survnma <- function(nma_df = NULL,
     stop("'type' has to be 'fixed' or 'random'")
 
   if(connected_check == TRUE)
-    if(check_connected(nma_df) == FALSE)
+    if(!check_connected(nma_df))
       stop("Network is not connected. Check baselines")
 
   studies <- unique(nma_df$study)
@@ -255,7 +255,8 @@ survnma <- function(nma_df = NULL,
     tmax = max(inputs$time),
     nparam = as.numeric(dim),
     P = P,
-    data = nma_df))
+    data = nma_df,
+    graph = create_network_from_data(nma_df)))
   class(out) <- "survnma"
 
   if(auto_restart == TRUE){

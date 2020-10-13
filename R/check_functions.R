@@ -1,7 +1,7 @@
 #' check_connected
 #'
 #' A simple check to see if the network provided is connected or not.
-#'  Meta-Analysis should be carried only on connected networks. It is used directly in survnma as
+#'  Meta-Analysis should be carried only on connected networks. It is used directly in `survnma` as
 #'  a stopping mechanism for networks that are not valid.
 #'
 #' @param df the input dataframe used for carrying the network meta-analysis
@@ -14,12 +14,13 @@
 #'
 
 check_connected <- function(df){
-  edges <- df[df$treatment != df$baseline,c("treatment", "baseline")]
-  gr <- igraph::graph_from_data_frame(edges, directed = FALSE)
-  out <- igraph::is.connected(gr)
-  return(out)
+  igraph::is.connected(create_network_from_data(df))
 }
 
+create_network_from_data <- function(df) {
+  edges <- df[df$treatment != df$baseline,c("treatment", "baseline", "study")]
+  igraph::graph_from_data_frame(edges, directed = FALSE)
+}
 
 #' check_ipd
 #'
