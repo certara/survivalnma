@@ -81,7 +81,13 @@ Network meta-analysis of survival data is often based on the reported hazard rat
 We follow the approach originally by Jensen _et al_ (2). Patient-level data were reconstructed as described by Guyot _et al_ (3). A variety of first-order and second-order fractional polynomials with different power functions and models with fixed scale and shape, random scale and fixed shape, and random scale and random shape were conducted.
 
 
-## Models available in `survivalnma`
+## Models available in the package
+
+The models included in the package concern calculating average treatment effects $d$ while taking into account baseline risk $\mu$ and making use of the transitivity property of the network meta-analysis models. Both $d$and $\mu$ are multi-dimensional, depending on number of parameters in each model (see below). That means the treatment effect is expressed in terms of impact on multiple parameters. 
+
+See the later section on how to interpret the model parameters for more details. In this section we only present the available models.
+
+
 
 ### Typical parametric models
 
@@ -118,7 +124,7 @@ Specifically for first order polynomials of the form $\ln(h_{kt}) = \beta_{0k} +
 
 *  If you set the coeffcient $\beta_1$ equal to 0, a constant loghazard function is obtained, reflecting exponentially distributed survival times.     
 *  If $\beta_1 \neq 0$ and $p = 1$ a linear hazard function is obtained which corresponds to a Gompertz survival function.     
-*  If $\beta_1 \neq 0$ and $p = 0$ a Weibull hazard function is obtained, and $\pmatrix{ d_0 \\ d_1}$ reflects the difference in respectively the scale and shape of the Weibull log hazard curve for treatment B relative to A.  
+*  If $\beta_1 \neq 0$ and $p = 0$ a Weibull hazard function is obtained, and $\pmatrix{ d_0 \\ d_1}$ reflects the difference in respectively the scale and shape of the Weibull log hazard curve for treatment effect $d$.
 
 Extending the first order fractional polynomial hazard function to a second-order fractional polynomial increases the possible (differences in) shapes even further.
 
@@ -195,7 +201,9 @@ KM.est <- survival::survfit(survival::Surv(time, event)~1,
                             data=IPD.data,
                             type="kaplan-meier")
 # This is what `survminer` plots for KM curves
-survminer::ggsurvplot(KM.est, data = IPD.data, legend.labs = "Kaplan Meier")
+km.plot <- survminer::ggsurvplot(KM.est, data = IPD.data, legend.labs = "Kaplan Meier")
+plot(km.plot$plot)
+
 ```
 
 
@@ -209,7 +217,7 @@ survminer::ggsurvplot(KM.est, data = IPD.data, legend.labs = "Kaplan Meier")
 
 ## Setting up WinBUGS
 
-The `survivalnma` package uses the WinBUGS software and the `R2WinBUGS` package. The default location for the program files of WinBUGS is expected to be stored in the root directory `"C:\WinBUGS14"`. If you have your own filing system and want to change the location of this directory then you need to inform `survivalnma`. 
+The package uses WinBUGS software and `R2WinBUGS` package. The default location for the program files of WinBUGS is expected to be stored in the root directory `"C:\WinBUGS14"`. If you have your own filing system and want to change the location of this directory then you need to inform `survivalnma`. 
 
 This alteration is easy. When running `survnma()` make sure to pass the additional parameter `bugs.directory = "PATH TO WINBUGS"`.
 
@@ -303,17 +311,18 @@ survnma.object <- survnma(nma_df = data,
 
 Regardless whether you specified `auto_restart = TRUE` or not, you will be warned if `Rhat > 1.05` given that `warnings = TRUE`
 
-## Interlude: understanding model parameters
+## Understanding model parameters
 
-__This is a technical note you can skip:__ as you can see from the WinBUGS result above, we can identify the parameters of each unique treatment effect (`d`) and each study baseline (`mu`).
+As you can see from the WinBUGS result above, we can identify the parameters of each unique treatment effect (`d`) and each study baseline (`mu`).
 
-For example, considering `mu[i, j]`:
+For `mu[i,j]`:
 
 * `[i]` represents the treatment, in this case there are 3 treatments so `[i]` spans from one to three
+* `[j]` represents the parameters of the model; e.g. when considering a second order fractional polynomial which has parameters `b0`, `b1` and `b2`; these are in positions `mu[i, 1]`, `mu[i, 2]` and `mu[i, 3]`; when considering Weibull model, two `j`'s are scale `nu` and shape `theta` of log-hazard curves
 
-* `[j]` represents the parameters of the model, as we are considering a second order fractional polynomial which has parameters `b0`, `b1` and `b2`; these are in positions `mu[i, 1]`, `mu[i, 2]` and `mu[i, 3]`
+For `d[i,j]`, `j` is still the model parameters, but `i` spans all treatments in the network. Value of `d` is always calculated in reference to the global baseline treatment (indexed by 1). Therefore, by definition, `d[1,j]` is zero for all `j` and therefore not shown in outputs. 
 
-The same holds for `d[i,j]` where the d vector reflects the difference for scale `nu` and shape `theta` of log-hazard curves for treatment B versus A. See (1) for details.
+We can always calcualte relative effect of two treatments A and B by calculating parameter $\delta = d_B - d_A$. This is in fact how the transitivity property of the network meta-analysis is implemented in the WeinBUGS models. See Ouwens _et al_ publication for more details.
 
 ***
 
@@ -450,7 +459,7 @@ We have constructed a script that automatically generates a Word document (can b
 
 # References & credits
 
-Vignettes and code in the `survnma` has been created at Analytica Laser, a Certara company by Witold Wiecek and Savvas Pafitis with modelling contributions and comments from Shuai Fu, Johanna Lister and Jie Meng. Original parametric curve models are sourced from work cited in references, primarily by MJ Ouwens and JP Jansen.
+Vignettes and code in the `survnma` has been created at Certara by Witold Wiecek and Savvas Pafitis with contributions and valuable comments from our colleagues Shuai Fu, Johanna Lister and Jie Meng. Original parametric curve models are sourced from work cited in references. They are primarily work of MJ Ouwens and JP Jansen.
 
 (1) Ouwens, Mario J. N. M., Zoe Philips, and Jeroen P. Jansen. “Network Meta-Analysis of Parametric Survival Curves.” Research Synthesis Methods 1, no. 3–4 (July 2010): 258–71. https://doi.org/10.1002/jrsm.25.
 
